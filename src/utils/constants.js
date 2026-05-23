@@ -1,5 +1,8 @@
+const PRODUCTION_API_BASE_URL = 'https://new-jubba-api-production.up.railway.app/api'
+
 export const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL?.trim() || 'http://localhost:5000/api'
+  import.meta.env.VITE_API_BASE_URL?.trim() ||
+  (import.meta.env.PROD ? PRODUCTION_API_BASE_URL : 'http://localhost:5000/api')
 
 export const STORAGE_KEYS = {
   auth: 'new-jubba-auth',
