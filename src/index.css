@@ -1,0 +1,294 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    font-family: Inter, sans-serif;
+    color: rgb(var(--color-brand-cream));
+    background-color: rgb(var(--page-bg-color));
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* New Jubba brand — mustard, slate, brick red */
+    --color-brand-gold: 251 192 45;
+    --color-brand-red: 183 28 28;
+    --color-brand-navy: 69 90 100;
+    --color-brand-surface: 55 71 79;
+    --color-brand-cream: 250 248 245;
+    --color-brand-success: 76 175 80;
+    --color-brand-error: 211 47 47;
+    --color-brand-info: 66 165 245;
+    --color-brand-warning: 251 192 45;
+
+    --page-bg-color: 38 50 56;
+    --surface-soft: rgba(255, 255, 255, 0.06);
+    --surface-soft-strong: rgba(255, 255, 255, 0.12);
+    --page-background:
+      radial-gradient(circle at 12% 8%, rgba(251, 192, 45, 0.14), transparent 28%),
+      radial-gradient(circle at 88% 12%, rgba(183, 28, 28, 0.1), transparent 24%),
+      linear-gradient(165deg, rgba(69, 90, 100, 0.35) 0%, rgba(38, 50, 56, 1) 55%);
+    --shadow-glow: 0 0 0 1px rgba(251, 192, 45, 0.25), 0 22px 50px rgba(251, 192, 45, 0.12);
+    --shadow-card: 0 20px 45px rgba(0, 0, 0, 0.28);
+    --shadow-red: 0 14px 32px rgba(183, 28, 28, 0.28);
+    --scroll-track: rgba(255, 255, 255, 0.04);
+    --scroll-thumb: rgba(251, 192, 45, 0.55);
+  }
+
+  * {
+    @apply box-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply m-0 min-h-screen bg-brand-black text-brand-cream font-body;
+    background-color: rgb(var(--page-bg-color));
+    background-image: var(--page-background);
+    background-attachment: fixed;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  a {
+    @apply text-inherit no-underline;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  input:not([type='checkbox']):not([type='radio']):not([type='file']):not(.input-icon-control),
+  select,
+  textarea {
+    @apply w-full rounded-2xl border border-brand-gold/25 px-4 py-3 text-brand-cream outline-none transition duration-200 placeholder:text-brand-cream/45 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/35;
+    background-color: var(--surface-soft);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading text-white;
+  }
+}
+
+@layer components {
+  .container-shell {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .glass-panel {
+    @apply rounded-3xl border border-white/10 bg-brand-navy/40 backdrop-blur-xl shadow-card;
+  }
+
+  .section-title {
+    @apply font-heading text-3xl font-bold tracking-tight text-white sm:text-4xl;
+  }
+
+  .section-copy {
+    @apply max-w-2xl text-sm leading-7 text-brand-cream/80 sm:text-base;
+  }
+
+  .gold-gradient {
+    background: linear-gradient(135deg, #fde68a 0%, #fbc02d 48%, #f9a825 100%);
+  }
+
+  .brand-gradient-text {
+    @apply bg-gradient-to-r from-brand-gold via-amber-200 to-brand-gold bg-clip-text text-transparent;
+  }
+
+  .upload-zone {
+    @apply flex min-h-[180px] cursor-pointer flex-col items-center justify-center gap-3 rounded-3xl border-2 border-dashed border-brand-gold/35 bg-brand-surface/30 p-6 text-center transition hover:border-brand-gold hover:bg-brand-gold/5;
+  }
+
+  .hero-grid {
+    background-image:
+      linear-gradient(rgba(251, 192, 45, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(251, 192, 45, 0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .hero-premium-overlay {
+    background:
+      linear-gradient(105deg, rgba(15, 20, 22, 0.94) 0%, rgba(15, 20, 22, 0.78) 42%, rgba(15, 20, 22, 0.52) 100%),
+      linear-gradient(180deg, rgba(15, 20, 22, 0.35) 0%, transparent 38%, rgba(15, 20, 22, 0.88) 100%);
+  }
+
+  .hero-premium-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.35;
+  }
+
+  .nav-pill-active {
+    @apply bg-brand-gold text-brand-black shadow-glow;
+  }
+
+  .field-label {
+    @apply mb-2 block text-sm font-medium text-brand-cream/85;
+  }
+
+  .field-hint {
+    @apply text-sm text-brand-cream/65;
+  }
+
+  .field-muted {
+    @apply text-sm text-brand-cream/55;
+  }
+
+  .surface-inset {
+    @apply rounded-2xl bg-white/5;
+  }
+
+  /* Icon + input: flex row so text never sits under the icon */
+  .input-icon-field {
+    @apply flex w-full items-center gap-3 rounded-2xl border border-brand-gold/25 py-0 pl-4 pr-3 text-brand-cream transition duration-200 focus-within:border-brand-gold focus-within:ring-2 focus-within:ring-brand-gold/35;
+    background-color: var(--surface-soft);
+  }
+
+  .input-icon-field .input-icon {
+    @apply h-[1.125rem] w-[1.125rem] shrink-0 text-brand-gold/55;
+  }
+
+  .input-icon-field > .input-icon-control {
+    @apply min-w-0 flex-1 border-0 bg-transparent py-3 pl-0 pr-1 text-brand-cream shadow-none outline-none ring-0 placeholder:text-brand-cream/45 focus:border-0 focus:ring-0;
+    background-color: transparent;
+  }
+
+  .input-icon-field .input-action {
+    @apply shrink-0;
+  }
+
+  .input-icon-field--trailing > .input-icon-control {
+    @apply pr-0;
+  }
+
+  .input-field-error {
+    @apply border-brand-error/60 focus:border-brand-error focus:ring-brand-error/25;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scroll-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb);
+  border-radius: 999px;
+}
+
+@media print {
+  @page {
+    margin: 8mm;
+    size: 80mm auto;
+  }
+
+  html,
+  body {
+    height: auto !important;
+    overflow: visible !important;
+    background: white !important;
+    color: #0f172a !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  #receipt-print-root,
+  #receipt-print-root * {
+    visibility: visible !important;
+  }
+
+  #receipt-print-root {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    display: block !important;
+    background: white !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    z-index: 2147483647 !important;
+  }
+
+  .receipt-paper {
+    max-width: 72mm !important;
+    margin: 0 auto !important;
+    box-shadow: none !important;
+    color: #0f172a !important;
+    background: white !important;
+  }
+}
+
+/* Warbixin daabac (Reports) */
+@media print {
+  @page report-page {
+    margin: 12mm;
+    size: A4 portrait;
+  }
+
+  body.printing-report * {
+    visibility: hidden !important;
+  }
+
+  body.printing-report #report-print-document,
+  body.printing-report #report-print-document * {
+    visibility: visible !important;
+  }
+
+  body.printing-report #report-print-document {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    page: report-page;
+    background: white !important;
+    color: #0f172a !important;
+  }
+
+  body.printing-report aside,
+  body.printing-report .no-print {
+    display: none !important;
+  }
+
+  body.printing-report main {
+    overflow: visible !important;
+    height: auto !important;
+  }
+
+  body.printing-report .report-kpi-card,
+  body.printing-report .report-print-document .rounded-3xl {
+    break-inside: avoid;
+    box-shadow: none !important;
+    border-color: #e2e8f0 !important;
+    background: white !important;
+  }
+
+  body.printing-report .report-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  body.printing-report .report-table th,
+  body.printing-report .report-table td {
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0.35rem 0;
+  }
+}
