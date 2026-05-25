@@ -48,7 +48,18 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     const raw = localStorage.getItem(STORAGE_KEYS.cart)
-    dispatch({ type: 'INIT', payload: raw ? JSON.parse(raw) : [] })
+    let items = []
+
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw)
+        items = Array.isArray(parsed) ? parsed : []
+      } catch {
+        localStorage.removeItem(STORAGE_KEYS.cart)
+      }
+    }
+
+    dispatch({ type: 'INIT', payload: items })
   }, [])
 
   useEffect(() => {
@@ -56,6 +67,11 @@ export const CartProvider = ({ children }) => {
   }, [state.items])
 
   const addItem = (item) => {
+    if (!item?.id) {
+      toast.error('Cuntadan lama dari karo gaariga (ID maqan)')
+      return
+    }
+
     dispatch({
       type: 'ADD_ITEM',
       payload: {

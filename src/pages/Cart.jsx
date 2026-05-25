@@ -1,6 +1,7 @@
 import { Minus, Plus, ShoppingBag, Trash2 } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import Button from '../components/ui/Button'
+import Card from '../components/ui/Card'
 import { optimizeImageUrl } from '../utils/cloudinaryAssets'
 import { useAuth } from '../hooks/useAuth'
 import { useCart } from '../hooks/useCart'
@@ -13,8 +14,8 @@ const Cart = () => {
 
   if (!items.length) {
     return (
-      <div className="container-shell py-16">
-        <Card className="p-10 text-center">
+      <div className="container-shell py-10 sm:py-16">
+        <Card className="p-8 text-center sm:p-10">
           <ShoppingBag className="mx-auto text-brand-gold" size={48} />
           <h1 className="mt-6 text-3xl">Gaarigaagu waa madhan yahay</h1>
           <p className="mt-3 text-sm text-brand-cream/65">
