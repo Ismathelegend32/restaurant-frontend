@@ -3,7 +3,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import { roleDashboardPaths, roleLabels, staffSectionTitles } from '../../utils/constants'
 import { getStaffNav } from '../../utils/staffNav'
-import logo from '../../assets/new-jubba-logo.png'
+import { brandLogoUrlSmall } from '../../utils/cloudinaryAssets'
 import Button from '../ui/Button'
 
 const Sidebar = () => {
@@ -26,7 +26,7 @@ const Sidebar = () => {
         <div className="border-b border-white/10 p-5">
           <Link to={homePath} className="flex items-center gap-3">
             <img
-              src={logo}
+              src={brandLogoUrlSmall}
               alt="New Jubaa"
               className="h-11 w-11 rounded-full border border-brand-gold/30 object-cover"
             />
@@ -82,7 +82,7 @@ const Sidebar = () => {
       <div className="shrink-0 border-b border-white/10 bg-[#141a1c] xl:hidden">
         <div className="flex items-center justify-between gap-3 px-4 py-3">
           <Link to={homePath} className="flex min-w-0 items-center gap-2">
-            <img src={logo} alt="" className="h-9 w-9 rounded-full border border-brand-gold/30 object-cover" />
+            <img src={brandLogoUrlSmall} alt="" className="h-9 w-9 rounded-full border border-brand-gold/30 object-cover" />
             <span className="truncate text-sm font-semibold text-white">New Jubaa</span>
           </Link>
           <button

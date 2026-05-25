@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import logo from '../assets/new-jubba-logo.png'
+import { brandLogoUrlLarge } from '../utils/cloudinaryAssets'
 import Button from '../components/ui/Button'
 import Card from '../components/ui/Card'
 import { useAuth } from '../hooks/useAuth'
@@ -57,11 +57,11 @@ const Register = () => {
   }
 
   return (
-    <div className="container-shell flex min-h-[80vh] items-center justify-center py-12">
+    <div className="auth-shell container-shell flex min-h-[100dvh] items-start justify-center py-6 sm:items-center sm:py-12">
       <Card className="w-full max-w-5xl overflow-hidden">
-        <div className="grid lg:grid-cols-[1fr_1fr]">
+        <div className="grid min-w-0 lg:grid-cols-[1fr_1fr]">
           <div className="hidden bg-[radial-gradient(circle_at_top,_rgba(201,168,76,0.28),_transparent_50%),_linear-gradient(180deg,_rgba(45,45,45,1),_rgba(26,26,26,1))] p-10 lg:block">
-            <img src={logo} alt="New Jubba Restaurant" className="mx-auto h-64 w-64 rounded-full object-cover shadow-glow" />
+            <img src={brandLogoUrlLarge} alt="New Jubba Restaurant" className="mx-auto h-64 w-64 rounded-full object-cover shadow-glow" />
             <h2 className="mt-8 text-center text-4xl">Ku Biir New Jubba</h2>
             <p className="mt-4 text-center text-sm leading-7 text-brand-cream/65">
               Samee akoonkaaga macmiilnimo si aad u dalbato, ula socoto gaarsiinta, oo aad
@@ -69,11 +69,11 @@ const Register = () => {
             </p>
           </div>
 
-          <div className="p-8 sm:p-10">
+          <div className="min-w-0 p-5 sm:p-8 md:p-10">
             <p className="text-sm uppercase tracking-[0.35em] text-brand-gold">Isdiiwaangelinta Macmiilka</p>
-            <h1 className="mt-3 text-4xl">Samee akoonkaaga</h1>
+            <h1 className="mt-2 text-3xl sm:mt-3 sm:text-4xl">Samee akoonkaaga</h1>
 
-            <form className="mt-8 grid gap-5" onSubmit={handleSubmit}>
+            <form className="mt-6 grid gap-4 sm:mt-8 sm:gap-5" onSubmit={handleSubmit}>
               <div>
                 <label className="field-label">Magaca oo Dhan</label>
                 <input
@@ -108,7 +108,7 @@ const Register = () => {
                 )}
               </div>
 
-              <div className="grid gap-5 sm:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
                 <div>
                 <label className="field-label">Password</label>
                   <input

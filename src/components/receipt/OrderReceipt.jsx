@@ -1,4 +1,4 @@
-import logo from '../../assets/new-jubba-logo.png'
+import { brandLogoUrl } from '../../utils/cloudinaryAssets'
 import { paymentMethodLabels } from '../../utils/constants'
 import { formatCurrency } from '../../utils/formatCurrency'
 import { formatDate } from '../../utils/formatDate'
@@ -8,9 +8,9 @@ const OrderReceipt = ({ order, payment }) => {
   const methodLabel = paymentMethodLabels[payment?.paymentMethod] || payment?.paymentMethod || '—'
 
   return (
-    <article className="receipt-paper mx-auto w-full max-w-[320px] bg-white p-5 text-[11px] leading-snug text-slate-900">
+    <article className="receipt-paper mx-auto w-full max-w-[320px] bg-white p-5 text-[11px] leading-snug text-slate-900 print:bg-white print:text-slate-900">
       <header className="border-b border-dashed border-slate-300 pb-4 text-center">
-        <img src={logo} alt="" className="mx-auto h-16 w-16 rounded-full object-cover" />
+        <img src={brandLogoUrl} alt="" className="mx-auto h-16 w-16 rounded-full object-cover" />
         <h1 className="mt-2 font-heading text-base font-bold tracking-tight text-slate-900">
           NEW <span className="text-[#B71C1C]">JUBAA</span> RESTAURANT
         </h1>

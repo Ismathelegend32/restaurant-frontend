@@ -1,10 +1,9 @@
 const variants = {
-  primary: 'gold-gradient text-brand-black hover:scale-[1.02] hover:shadow-glow',
-  accent: 'bg-brand-red text-white hover:scale-[1.02] hover:shadow-red',
-  outline:
-    'border border-brand-gold/40 bg-transparent text-brand-gold hover:bg-brand-gold/10 hover:scale-[1.01]',
+  primary: 'gold-gradient text-brand-black hover:shadow-glow',
+  accent: 'bg-brand-red text-white hover:shadow-red',
+  outline: 'border border-brand-gold/40 bg-transparent text-brand-gold hover:bg-brand-gold/10',
   ghost: 'bg-brand-surface/50 text-brand-cream hover:bg-brand-navy/60',
-  danger: 'bg-brand-error text-white hover:scale-[1.02]',
+  danger: 'bg-brand-error text-white',
 }
 
 const sizes = {
@@ -27,7 +26,7 @@ const Button = ({
     <button
       type={type}
       disabled={disabled || loading}
-      className={`inline-flex items-center justify-center gap-2 rounded-full font-semibold transition duration-300 disabled:cursor-not-allowed disabled:opacity-60 ${variants[variant]} ${sizes[size]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 rounded-full font-semibold transition duration-200 disabled:cursor-not-allowed disabled:opacity-60 ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     >
       {loading && <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />}

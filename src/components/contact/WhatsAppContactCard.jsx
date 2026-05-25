@@ -31,7 +31,7 @@ const WhatsAppContactCard = ({ compact = false, className = '' }) => {
       rel="noopener noreferrer"
       className={`group relative block overflow-hidden rounded-3xl border border-[#25D366]/30 bg-gradient-to-br from-[#128C7E]/25 via-brand-navy/60 to-[#075E54]/30 p-5 shadow-card transition hover:border-[#25D366]/55 hover:shadow-[0_0_32px_rgba(37,211,102,0.18)] sm:p-6 ${className}`}
     >
-      <div className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full bg-[#25D366]/15 blur-2xl transition group-hover:bg-[#25D366]/25" />
+      <div className="pointer-events-none absolute -right-6 -top-6 hidden h-28 w-28 rounded-full bg-[#25D366]/15 sm:block sm:blur-2xl" aria-hidden />
       <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-start gap-4">
           <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#25D366] text-white shadow-[0_8px_24px_rgba(37,211,102,0.35)]">

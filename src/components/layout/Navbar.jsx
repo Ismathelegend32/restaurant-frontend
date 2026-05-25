@@ -5,7 +5,7 @@ import { useAuth } from '../../hooks/useAuth'
 import { useCart } from '../../hooks/useCart'
 import { roleDashboardPaths, roleLabels } from '../../utils/constants'
 import Button from '../ui/Button'
-import logo from '../../assets/new-jubba-logo.png'
+import { brandLogoUrlSmall } from '../../utils/cloudinaryAssets'
 
 const Navbar = ({ staffMode = false }) => {
   const [open, setOpen] = useState(false)
@@ -45,13 +45,13 @@ const Navbar = ({ staffMode = false }) => {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-brand-navy/90 shadow-card backdrop-blur-xl">
+    <header className="site-header sticky top-0 z-40 border-b border-white/10 shadow-card">
       <div className="container-shell flex items-center justify-between gap-4 py-3 sm:py-4">
         <Link to="/" className="group flex items-center gap-3">
           <img
-            src={logo}
+            src={brandLogoUrlSmall}
             alt="New Jubba Restaurant"
-            className="h-12 w-12 rounded-full border-2 border-brand-gold/40 bg-white object-contain p-0.5 shadow-glow transition group-hover:scale-105 sm:h-14 sm:w-14"
+            className="h-12 w-12 rounded-full border-2 border-brand-gold/40 bg-white object-contain p-0.5 shadow-glow sm:h-14 sm:w-14"
           />
           <div className="hidden min-w-0 sm:block">
             <p className="font-heading text-lg font-bold leading-tight text-white">

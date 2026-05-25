@@ -1,7 +1,7 @@
 import { Minus, Plus, ShoppingBag, Trash2 } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import Button from '../components/ui/Button'
-import Card from '../components/ui/Card'
+import { optimizeImageUrl } from '../utils/cloudinaryAssets'
 import { useAuth } from '../hooks/useAuth'
 import { useCart } from '../hooks/useCart'
 import { formatCurrency } from '../utils/formatCurrency'
@@ -40,7 +40,7 @@ const Cart = () => {
           <Card key={item.id} className="p-5">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
               <img
-                src={item.imageUrl}
+                src={optimizeImageUrl(item.imageUrl, { width: 224, height: 224 })}
                 alt={item.foodName}
                 className="h-24 w-full rounded-2xl object-cover sm:w-28"
               />

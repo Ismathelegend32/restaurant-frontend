@@ -11,9 +11,13 @@ const IconInput = ({
       error ? 'border-brand-error/60 focus-within:border-brand-error focus-within:ring-brand-error/25' : ''
     } ${className}`}
   >
-    {Icon && <Icon className="input-icon" aria-hidden />}
+    {Icon && (
+      <span className="input-icon-wrap" aria-hidden>
+        <Icon className="input-icon" />
+      </span>
+    )}
     <input id={id} className="input-icon-control" {...props} />
-    {trailing}
+    {trailing && <span className="input-trailing-wrap">{trailing}</span>}
   </div>
 )
 

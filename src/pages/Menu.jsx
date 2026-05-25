@@ -7,12 +7,13 @@ import LoadingSpinner from '../components/ui/LoadingSpinner'
 import { useCart } from '../hooks/useCart'
 import menuService from '../services/menuService'
 import {
-  fallbackMenuItems,
   inferMenuCategory,
   menuCategories,
   menuCategoryLabels,
   STORAGE_KEYS,
 } from '../utils/constants'
+import { menuHeroDefaultSrc, menuHeroSrcSet, optimizeImageUrl } from '../utils/cloudinaryAssets'
+import { fallbackMenuItems } from '../utils/fallbackMenu'
 import { formatCurrency } from '../utils/formatCurrency'
 
 const Menu = () => {
@@ -73,11 +74,20 @@ const Menu = () => {
     <div className="container-shell space-y-8 py-10">
       <Card className="overflow-hidden border-brand-gold/25">
         <div className="relative">
+          <img
+            src={menuHeroDefaultSrc}
+            srcSet={menuHeroSrcSet}
+            sizes="100vw"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
           <div
-            className="absolute inset-0 bg-cover bg-center"
+            className="absolute inset-0"
             style={{
-              backgroundImage:
-                "linear-gradient(90deg, rgba(10,10,10,0.9), rgba(10,10,10,0.45), rgba(10,10,10,0.88)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1800&q=80')",
+              background:
+                'linear-gradient(90deg, rgba(10,10,10,0.9), rgba(10,10,10,0.45), rgba(10,10,10,0.88))',
             }}
           />
           <div className="relative grid gap-8 p-8 sm:p-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
@@ -151,10 +161,11 @@ const Menu = () => {
           <Card key={item.id} className="group flex flex-col">
             <div className="relative h-60 overflow-hidden">
               <img
-                src={item.imageUrl}
+                src={optimizeImageUrl(item.imageUrl, { width: 720 })}
                 alt={item.foodName}
                 loading="lazy"
-                className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+                className="hover-zoom-image h-full w-full object-cover"
+                decoding="async"
               />
               <div className="absolute left-4 top-4 rounded-full bg-brand-black/80 px-3 py-1 text-xs font-semibold text-brand-gold">
                 {menuCategoryLabels[inferMenuCategory(item)] || inferMenuCategory(item)}

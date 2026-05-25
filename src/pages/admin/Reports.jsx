@@ -13,7 +13,7 @@ import Button from '../../components/ui/Button'
 import Card from '../../components/ui/Card'
 import LoadingSpinner from '../../components/ui/LoadingSpinner'
 import reportService from '../../services/reportService'
-import logo from '../../assets/new-jubba-logo.png'
+import { brandLogoUrl } from '../../utils/cloudinaryAssets'
 import { paymentMethodLabels, statusLabels } from '../../utils/constants'
 import { formatCurrency } from '../../utils/formatCurrency'
 import { formatDate } from '../../utils/formatDate'
@@ -119,7 +119,7 @@ const Reports = () => {
         <header className="report-print-header hidden rounded-2xl border border-slate-200 bg-white p-6 print:block">
           <div className="flex items-center justify-between gap-4 border-b border-slate-200 pb-4">
             <div className="flex items-center gap-3">
-              <img src={logo} alt="" className="h-14 w-14 rounded-full object-cover" />
+              <img src={brandLogoUrl} alt="" className="h-14 w-14 rounded-full object-cover" />
               <div>
                 <h1 className="text-xl font-bold text-slate-900">NEW JUBAA RESTAURANT</h1>
                 <p className="text-xs uppercase tracking-widest text-slate-500">Warbixinta Maamulka</p>

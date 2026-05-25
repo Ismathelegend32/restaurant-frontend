@@ -16,6 +16,8 @@ import StaffLayout from './components/layout/StaffLayout'
 
 import LoadingSpinner from './components/ui/LoadingSpinner'
 
+import ReceiptPreviewHost from './components/receipt/ReceiptPreviewHost'
+
 import { STAFF_ROLES } from './utils/constants'
 
 
@@ -74,9 +76,8 @@ const ScrollToTop = () => {
 
 
   useEffect(() => {
-
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-
+    const isMobile = window.matchMedia('(max-width: 768px)').matches
+    window.scrollTo({ top: 0, behavior: isMobile ? 'auto' : 'smooth' })
   }, [pathname])
 
 
@@ -105,11 +106,11 @@ const MainLayout = () => {
 
   return (
 
-    <div className="min-h-screen">
+    <div className="flex min-h-[100dvh] flex-col">
 
       <Navbar />
 
-      <main className="min-h-[calc(100vh-160px)]">
+      <main className="min-h-0 flex-1">
 
         <Suspense fallback={<RouteFallback />}>
 
@@ -137,9 +138,13 @@ const App = () => {
 
       <ScrollToTop />
 
+      <ReceiptPreviewHost />
+
       <Toaster
 
-        position="top-right"
+        position="top-center"
+
+        containerStyle={{ top: 'max(12px, env(safe-area-inset-top))' }}
 
         toastOptions={{
 

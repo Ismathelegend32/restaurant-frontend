@@ -1,68 +1,50 @@
-import { flushSync } from 'react-dom'
-import { createRoot } from 'react-dom/client'
-import OrderReceipt from '../components/receipt/OrderReceipt'
-
-const waitForImages = (container) => {
-  const images = [...container.querySelectorAll('img')]
-  if (!images.length) return Promise.resolve()
-
-  return Promise.all(
-    images.map(
-      (img) =>
-        new Promise((resolve) => {
-          if (img.complete) resolve()
-          else {
-            img.onload = resolve
-            img.onerror = resolve
-          }
-        }),
-    ),
-  )
-}
+import { buildReceiptPrintHtml } from './buildReceiptPrintHtml'
+import { isMobileDevice, openReceiptPreview } from './receiptPreview'
 
 export const canPrintReceipt = (order) =>
   Boolean(order && (order.status === 'Delivered' || order.payment?.paymentStatus === 'Paid'))
 
+const resolvePayment = (order, payment) =>
+  payment || {
+    paymentMethod: order.payment?.paymentMethod,
+    paidAt: order.payment?.paidAt || order.createdAt || new Date().toISOString(),
+  }
+
+/** Opens a clean receipt page — works on mobile print / Save as PDF (no blank page). */
+export const openReceiptPrintWindow = (order, payment) => {
+  if (!order) return false
+
+  const html = buildReceiptPrintHtml(order, resolvePayment(order, payment))
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' })
+  const blobUrl = URL.createObjectURL(blob)
+
+  const printWin = window.open(blobUrl, '_blank', 'noopener,noreferrer')
+
+  if (!printWin) {
+    const link = document.createElement('a')
+    link.href = blobUrl
+    link.target = '_blank'
+    link.rel = 'noopener noreferrer'
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
+  }
+
+  setTimeout(() => URL.revokeObjectURL(blobUrl), 120_000)
+  return true
+}
+
+export const runReceiptPrint = async (order, payment) => {
+  openReceiptPrintWindow(order, payment)
+}
+
 export const printOrderReceipt = async (order, payment) => {
   if (!order) return
 
-  const existing = document.getElementById('receipt-print-root')
-  existing?.remove()
-
-  const host = document.createElement('div')
-  host.id = 'receipt-print-root'
-  document.body.appendChild(host)
-
-  const root = createRoot(host)
-
-  flushSync(() => {
-    root.render(
-      <OrderReceipt
-        order={order}
-        payment={
-          payment || {
-            paymentMethod: order.payment?.paymentMethod,
-            paidAt: order.payment?.paidAt || order.createdAt || new Date().toISOString(),
-          }
-        }
-      />,
-    )
-  })
-
-  await waitForImages(host)
-  await new Promise((resolve) => setTimeout(resolve, 200))
-
-  const cleanup = () => {
-    root.unmount()
-    host.remove()
+  if (isMobileDevice()) {
+    openReceiptPreview(order, resolvePayment(order, payment))
+    return
   }
 
-  const onAfterPrint = () => {
-    window.removeEventListener('afterprint', onAfterPrint)
-    cleanup()
-  }
-
-  window.addEventListener('afterprint', onAfterPrint)
-  window.print()
-  setTimeout(cleanup, 30_000)
+  openReceiptPrintWindow(order, payment)
 }

@@ -42,17 +42,29 @@
   }
 
   html {
-    @apply scroll-smooth;
+    -webkit-text-size-adjust: 100%;
+    color-scheme: dark;
+  }
+
+  @media (prefers-reduced-motion: no-preference) and (min-width: 769px) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
     @apply m-0 min-h-screen bg-brand-black text-brand-cream font-body;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
     background-color: rgb(var(--page-bg-color));
     background-image: var(--page-background);
-    background-attachment: fixed;
-    transition:
-      background-color 0.3s ease,
-      color 0.3s ease;
+    background-attachment: scroll;
+  }
+
+  @media (min-width: 1024px) and (hover: hover) {
+    body {
+      background-attachment: fixed;
+    }
   }
 
   a {
@@ -69,8 +81,9 @@
   input:not([type='checkbox']):not([type='radio']):not([type='file']):not(.input-icon-control),
   select,
   textarea {
-    @apply w-full rounded-2xl border border-brand-gold/25 px-4 py-3 text-brand-cream outline-none transition duration-200 placeholder:text-brand-cream/45 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/35;
+    @apply w-full rounded-2xl border border-brand-gold/25 px-4 py-3 text-base text-brand-cream outline-none transition duration-200 placeholder:text-brand-cream/45 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/35 sm:text-sm;
     background-color: var(--surface-soft);
+    max-width: 100%;
   }
 
   h1,
@@ -85,11 +98,62 @@
 
 @layer components {
   .container-shell {
-    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-7xl px-3 sm:px-6 lg:px-8;
+  }
+
+  .auth-shell {
+    @apply w-full min-w-0 max-w-full;
+  }
+
+  .auth-form {
+    color-scheme: dark;
   }
 
   .glass-panel {
-    @apply rounded-3xl border border-white/10 bg-brand-navy/40 backdrop-blur-xl shadow-card;
+    @apply rounded-3xl border border-white/10 bg-brand-navy/90 shadow-card;
+  }
+
+  @media (min-width: 768px) and (hover: hover) {
+    .glass-panel {
+      @apply bg-brand-navy/40 backdrop-blur-xl;
+    }
+  }
+
+  .site-header {
+    @apply bg-brand-navy/95;
+    transform: translateZ(0);
+  }
+
+  @media (min-width: 768px) and (hover: hover) {
+    .site-header {
+      @apply bg-brand-navy/90 backdrop-blur-md;
+    }
+  }
+
+  .perf-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 480px;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .hover-zoom-image {
+      @apply transition duration-500;
+    }
+
+    .group:hover .hover-zoom-image {
+      transform: scale(1.06);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 
   .section-title {
@@ -130,6 +194,16 @@
     opacity: 0.35;
   }
 
+  @media (max-width: 767px) {
+    .hero-premium-grain {
+      display: none;
+    }
+
+    body {
+      background-image: none;
+    }
+  }
+
   .nav-pill-active {
     @apply bg-brand-gold text-brand-black shadow-glow;
   }
@@ -150,32 +224,53 @@
     @apply rounded-2xl bg-white/5;
   }
 
-  /* Icon + input: flex row so text never sits under the icon */
+  /* Icon + input: one unified dark field (no nested white box on mobile) */
   .input-icon-field {
-    @apply flex w-full items-center gap-3 rounded-2xl border border-brand-gold/25 py-0 pl-4 pr-3 text-brand-cream transition duration-200 focus-within:border-brand-gold focus-within:ring-2 focus-within:ring-brand-gold/35;
+    @apply flex min-h-[52px] w-full items-stretch gap-2 rounded-2xl border border-brand-gold/25 py-0 pl-4 pr-2 text-brand-cream transition duration-200 focus-within:border-brand-gold focus-within:ring-2 focus-within:ring-brand-gold/35;
     background-color: var(--surface-soft);
+    color-scheme: dark;
+  }
+
+  .input-icon-field .input-icon-wrap,
+  .input-icon-field .input-trailing-wrap {
+    @apply flex shrink-0 items-center self-stretch;
   }
 
   .input-icon-field .input-icon {
-    @apply h-[1.125rem] w-[1.125rem] shrink-0 text-brand-gold/55;
+    @apply h-[1.125rem] w-[1.125rem] text-brand-gold/70;
   }
 
   .input-icon-field > .input-icon-control {
-    @apply min-w-0 flex-1 border-0 bg-transparent py-3 pl-0 pr-1 text-brand-cream shadow-none outline-none ring-0 placeholder:text-brand-cream/45 focus:border-0 focus:ring-0;
-    background-color: transparent;
+    @apply min-h-[52px] min-w-0 flex-1 self-stretch border-0 bg-transparent py-3 pl-0 pr-2 text-base text-brand-cream shadow-none outline-none ring-0 placeholder:text-brand-cream/45 focus:border-0 focus:ring-0 sm:text-sm;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+    background: transparent !important;
+    box-shadow: none !important;
   }
 
   .input-icon-field .input-action {
-    @apply shrink-0;
+    @apply flex shrink-0 items-center self-stretch;
   }
 
   .input-icon-field--trailing > .input-icon-control {
-    @apply pr-0;
+    @apply pr-1;
   }
 
   .input-field-error {
     @apply border-brand-error/60 focus:border-brand-error focus:ring-brand-error/25;
   }
+}
+
+/* Mobile Safari/Chrome: prevent white autofill box inside dark fields */
+.input-icon-field > .input-icon-control:-webkit-autofill,
+.input-icon-field > .input-icon-control:-webkit-autofill:hover,
+.input-icon-field > .input-icon-control:-webkit-autofill:focus {
+  -webkit-text-fill-color: rgb(var(--color-brand-cream)) !important;
+  caret-color: rgb(var(--color-brand-cream));
+  -webkit-box-shadow: 0 0 0 1000px rgba(38, 50, 56, 0.98) inset !important;
+  box-shadow: 0 0 0 1000px rgba(38, 50, 56, 0.98) inset !important;
+  transition: background-color 99999s ease-out 0s;
 }
 
 ::-webkit-scrollbar {
@@ -192,8 +287,8 @@
 }
 
 @media print {
-  @page {
-    margin: 8mm;
+  @page receipt-page {
+    margin: 6mm;
     size: 80mm auto;
   }
 
@@ -207,29 +302,37 @@
     print-color-adjust: exact;
   }
 
-  body * {
+  body.printing-receipt * {
     visibility: hidden !important;
   }
 
-  #receipt-print-root,
-  #receipt-print-root * {
+  body.printing-receipt #receipt-print-root,
+  body.printing-receipt #receipt-print-root * {
     visibility: visible !important;
   }
 
-  #receipt-print-root {
-    position: absolute !important;
+  body.printing-receipt #receipt-print-root {
+    position: fixed !important;
+    inset: 0 !important;
     left: 0 !important;
     top: 0 !important;
     width: 100% !important;
-    display: block !important;
+    height: auto !important;
+    min-height: 100% !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
     background: white !important;
-    padding: 0 !important;
+    padding: 8mm 4mm !important;
     margin: 0 !important;
     z-index: 2147483647 !important;
+    overflow: visible !important;
+    page: receipt-page;
   }
 
-  .receipt-paper {
+  body.printing-receipt .receipt-paper {
     max-width: 72mm !important;
+    width: 100% !important;
     margin: 0 auto !important;
     box-shadow: none !important;
     color: #0f172a !important;

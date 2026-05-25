@@ -3,7 +3,8 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "env": {
-    "VITE_API_BASE_URL": "https://new-jubba-api-production.up.railway.app/api"
+    "VITE_API_BASE_URL": "https://new-jubba-api-production.up.railway.app/api",
+    "VITE_CLOUDINARY_CLOUD_NAME": "duzuguldp"
   },
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
