@@ -17,6 +17,7 @@ import StaffLayout from './components/layout/StaffLayout'
 import LoadingSpinner from './components/ui/LoadingSpinner'
 
 import ReceiptPreviewHost from './components/receipt/ReceiptPreviewHost'
+import InstallPrompt from './components/pwa/InstallPrompt'
 
 import { STAFF_ROLES } from './utils/constants'
 
@@ -135,6 +136,8 @@ const App = () => {
   return (
 
     <>
+
+      <InstallPrompt />
 
       <ScrollToTop />
 
