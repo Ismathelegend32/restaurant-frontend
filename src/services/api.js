@@ -56,6 +56,16 @@ api.interceptors.response.use(
         'Ma lihid ogolaansho. Ka bax (logout) oo mar kale soo gal si token cusub u hesho.'
     }
 
+    const isNetworkFailure =
+      !error?.response &&
+      (error?.code === 'ERR_NETWORK' ||
+        /network error/i.test(error?.message || ''))
+
+    if (isNetworkFailure) {
+      message =
+        'Server-ka lama gaarin (Network Error). Hubi internet-ka, Railway API, iyo in VITE_API_BASE_URL sax yahay.'
+    }
+
     const wrapped = new Error(message)
     wrapped.status = status
     return Promise.reject(wrapped)
