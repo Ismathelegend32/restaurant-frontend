@@ -5,6 +5,7 @@ import { roleDashboardPaths, roleLabels, staffSectionTitles } from '../../utils/
 import { getStaffNav } from '../../utils/staffNav'
 import { brandLogoUrlSmall } from '../../utils/cloudinaryAssets'
 import Button from '../ui/Button'
+import UserAvatar from '../ui/UserAvatar'
 
 const Sidebar = () => {
   const { user, logout } = useAuth()
@@ -37,9 +38,18 @@ const Sidebar = () => {
               </p>
             </div>
           </Link>
-          <p className="mt-3 truncate px-1 text-xs text-brand-cream/50">
-            {user?.name} · {roleLabels[user?.role] || user?.role}
-          </p>
+          <Link
+            to="/staff/profile"
+            className="mt-4 flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 p-3 transition hover:border-brand-gold/40"
+          >
+            <UserAvatar user={user} size="md" />
+            <div className="min-w-0">
+              <p className="truncate text-sm font-semibold text-white">{user?.name}</p>
+              <p className="truncate text-xs text-brand-cream/55">
+                {roleLabels[user?.role] || user?.role}
+              </p>
+            </div>
+          </Link>
         </div>
 
         <nav className="flex-1 space-y-1 overflow-y-auto p-3">
@@ -81,9 +91,18 @@ const Sidebar = () => {
 
       <div className="shrink-0 border-b border-white/10 bg-[#141a1c] xl:hidden">
         <div className="flex items-center justify-between gap-3 px-4 py-3">
-          <Link to={homePath} className="flex min-w-0 items-center gap-2">
+          <Link to={homePath} className="flex min-w-0 flex-1 items-center gap-2">
             <img src={brandLogoUrlSmall} alt="" className="h-9 w-9 rounded-full border border-brand-gold/30 object-cover" />
             <span className="truncate text-sm font-semibold text-white">New Jubaa</span>
+          </Link>
+          <Link
+            to="/staff/profile"
+            className="flex shrink-0 items-center gap-2 rounded-lg border border-white/10 bg-white/5 py-1 pl-1 pr-2"
+          >
+            <UserAvatar user={user} size="sm" />
+            <span className="hidden max-w-[88px] truncate text-xs font-medium text-brand-cream sm:inline">
+              {user?.name?.split(' ')[0]}
+            </span>
           </Link>
           <button
             type="button"

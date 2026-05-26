@@ -57,7 +57,7 @@ const CustomerDashboard = lazy(() => import('./pages/customer/CustomerDashboard'
 
 const OrderHistory = lazy(() => import('./pages/customer/OrderHistory'))
 
-const Profile = lazy(() => import('./pages/customer/Profile'))
+const Profile = lazy(() => import('./pages/Profile'))
 
 const KitchenDisplay = lazy(() => import('./pages/kitchen/KitchenDisplay'))
 
@@ -268,6 +268,8 @@ const App = () => {
               <Route path="/staff/kitchen" element={<KitchenDisplay />} />
 
             </Route>
+
+            <Route path="/staff/profile" element={<Profile staffMode />} />
 
           </Route>
 

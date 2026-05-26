@@ -15,6 +15,11 @@ const authService = {
     const response = await api.get('/auth/me')
     return extractData(response)
   },
+
+  async updateProfile(payload) {
+    const response = await api.patch('/auth/profile', payload)
+    return extractData(response)
+  },
 }
 
 export default authService

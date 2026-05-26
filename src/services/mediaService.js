@@ -17,6 +17,14 @@ const mediaService = {
     return extractData(response)
   },
 
+  async uploadProfileImage(file) {
+    const formData = new FormData()
+    formData.append('file', file)
+
+    const response = await api.post('/media/upload-profile-image', formData)
+    return extractData(response)
+  },
+
   async uploadImageDirect(file) {
     if (!cloudName || !uploadPreset) {
       throw new Error(

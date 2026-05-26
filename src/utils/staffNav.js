@@ -5,8 +5,16 @@ import {
   LayoutDashboard,
   MenuSquare,
   ReceiptText,
+  User,
   Users,
 } from 'lucide-react'
+
+const profileNavItem = {
+  to: '/staff/profile',
+  label: 'Profile-kayga',
+  shortLabel: 'Profile',
+  icon: User,
+}
 
 export const staffNavByRole = {
   Admin: [
@@ -15,14 +23,17 @@ export const staffNavByRole = {
     { to: '/staff/orders', label: 'Maamul Dalabyada', shortLabel: 'Dalabyo', icon: ReceiptText },
     { to: '/staff/users', label: 'Maamul Isticmaaleyaasha', shortLabel: 'Dadka', icon: Users },
     { to: '/staff/reports', label: 'Warbixinno', shortLabel: 'Warbixin', icon: BarChart3 },
+    profileNavItem,
   ],
   Cashier: [
     { to: '/staff/cashier', label: 'Lacag-bixinta', shortLabel: 'Lacag', icon: CreditCard, end: true },
     { to: '/staff/orders', label: 'Dalabyada', shortLabel: 'Dalabyo', icon: ReceiptText },
+    profileNavItem,
   ],
   KitchenStaff: [
     { to: '/staff/kitchen', label: 'Jikada', shortLabel: 'Jikada', icon: ChefHat, end: true },
     { to: '/staff/orders', label: 'Dalabyada', shortLabel: 'Dalabyo', icon: ReceiptText },
+    profileNavItem,
   ],
 }
 

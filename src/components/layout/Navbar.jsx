@@ -1,10 +1,11 @@
-import { Menu, ShoppingBag, User, X } from 'lucide-react'
+import { Menu, ShoppingBag, X } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import { useCart } from '../../hooks/useCart'
 import { roleDashboardPaths, roleLabels } from '../../utils/constants'
 import Button from '../ui/Button'
+import UserAvatar from '../ui/UserAvatar'
 import { brandLogoUrlSmall } from '../../utils/cloudinaryAssets'
 
 const Navbar = ({ staffMode = false }) => {
@@ -38,6 +39,8 @@ const Navbar = ({ staffMode = false }) => {
         : []),
     ]
   }, [isAuthenticated, isStaff, staffMode, user?.role])
+
+  const profilePath = isStaff ? '/staff/profile' : '/profile'
 
   const handleLogout = () => {
     logout()
@@ -98,11 +101,11 @@ const Navbar = ({ staffMode = false }) => {
             <div className="flex items-center gap-3">
               <button
                 type="button"
-                onClick={() => navigate(roleDashboardPaths[user?.role] || '/')}
-                className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-brand-cream transition hover:border-brand-gold"
+                onClick={() => navigate(profilePath)}
+                className="flex max-w-[220px] items-center gap-2 rounded-full border border-white/15 bg-white/5 py-1.5 pl-1.5 pr-4 text-sm font-medium text-brand-cream transition hover:border-brand-gold"
               >
-                <User size={16} className="text-brand-gold" />
-                <span>
+                <UserAvatar user={user} size="sm" />
+                <span className="truncate">
                   {user?.name?.split(' ')[0]}
                   {user?.role ? ` • ${roleLabels[user.role] || user.role}` : ''}
                 </span>
